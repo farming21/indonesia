@@ -1,0 +1,18 @@
+# File hasil generate (akan dibuat ulang oleh GitHub Actions)
+index.html
+videos/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
