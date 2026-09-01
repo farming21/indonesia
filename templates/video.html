@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ JUDUL }}</title>
+    <meta name="description" content="{{ DESKRIPSI }}">
+    <meta property="og:title" content="{{ JUDUL }}">
+    <meta property="og:description" content="{{ DESKRIPSI }}">
+    <meta property="og:image" content="{{ COVER }}">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-btn">&larr; Kembali ke Beranda</a>
+    </header>
+    
+    <main class="video-detail">
+        <h1>{{ JUDUL }}</h1>
+        <p class="meta-info">Kategori: <strong>{{ KATEGORI }}</strong> | Tanggal: {{ TANGGAL }}</p>
+        
+        <div class="video-player">
+            <iframe src="https://drive.google.com/file/d/{{ DRIVE_ID }}/preview" allow="autoplay" allowfullscreen></iframe>
+        </div>
+        
+        <div class="description">
+            <h3>Deskripsi</h3>
+            <p>{{ DESKRIPSI }}</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Farming21. All rights reserved.</p>
+    </footer>
+</body>
+</html>
