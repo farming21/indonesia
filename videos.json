@@ -16,5 +16,14 @@
     "deskripsi": "tes papua",
     "kategori": "papua",
     "cover": "covers/tes-papua.jpg"
+  },
+  {
+    "slug": "video-dengan-cover",
+    "judul": "Video Dengan Cover",
+    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "tanggal": "2026-09-01",
+    "deskripsi": "Test upload cover",
+    "kategori": "indonesia",
+    "cover": "covers/video-dengan-cover.jpg"
   }
 ]
