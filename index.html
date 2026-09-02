@@ -3,489 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RepoPilot-AI - Panel Admin</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #f5f7fa;
-            padding: 2rem;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        header {
-            background: #2563eb;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        header h1 { font-size: 1.5rem; }
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #374151;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-        textarea { min-height: 100px; resize: vertical; }
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-        }
-        .btn-primary:hover { background: #1d4ed8; }
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-        }
-        .btn-danger {
-            background: #ef4444;
-            color: white;
-        }
-        .status {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-            display: none;
-        }
-        .status.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #6ee7b7;
-        }
-        .status.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fca5a5;
-        }
-        .video-list {
-            margin-top: 1rem;
-        }
-        .video-item {
-            padding: 1rem;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-        .video-item h3 { font-size: 1rem; margin-bottom: 0.25rem; }
-        .video-item .meta { font-size: 0.85rem; color: #6b7280; }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
-        .badge-indonesia { background: #dbeafe; color: #1e40af; }
-        .badge-papua { background: #fef3c7; color: #92400e; }
-        .actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-        .hidden { display: none; }
-    </style>
+    <title>Koleksi Video Indonesia & Papua</title>
+    <meta name="description" content="Platform video kategori Indonesia dan Papua.">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>RepoPilot-AI - Panel Admin</h1>
-            <p>Kelola video Indonesia dan Papua</p>
-        </header>
-
-        <!-- Form Tambah/Edit Video -->
-        <div class="card">
-            <h2 id="formTitle">Tambah Video Baru</h2>
-            <form id="videoForm">
-                <input type="hidden" id="editSlug" value="">
-
-                <div class="form-group">
-                    <label for="judul">Judul Video *</label>
-                    <input type="text" id="judul" required placeholder="Masukkan judul video">
-                </div>
-
-                <div class="form-group">
-                    <label for="slug">Slug (URL-friendly) *</label>
-                    <input type="text" id="slug" required placeholder="contoh: judul-video-saya">
-                    <small style="color: #6b7280; font-size: 0.85rem;">Gunakan huruf kecil, tanpa spasi, gunakan tanda hubung (-)</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="driveId">Google Drive ID *</label>
-                    <input type="text" id="driveId" required placeholder="ID file dari Google Drive">
-                    <small style="color: #6b7280; font-size: 0.85rem;">Contoh: 1ABC123xyz dari link drive.google.com/file/d/1ABC123xyz</small>
-                </div>
-
-                <div class="form-group">
-                    <label for="kategori">Kategori *</label>
-                    <select id="kategori" required>
-                        <option value="">Pilih kategori</option>
-                        <option value="indonesia">Indonesia</option>
-                        <option value="papua">Papua</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tanggal">Tanggal Publikasi *</label>
-                    <input type="date" id="tanggal" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="deskripsi">Deskripsi</label>
-                    <textarea id="deskripsi" placeholder="Deskripsi singkat video..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="coverFile">Upload Cover Image</label>
-                    <input type="file" id="coverFile" accept="image/*">
-                    <small style="color: #6b7280; font-size: 0.85rem;">Format: JPG/PNG. File besar akan otomatis dikompres agar aman di bawah batas 1MB Worker.</small>
-                </div>
-
-                <div style="display: flex; gap: 1rem;">
-                    <button type="submit" class="btn btn-primary">Publish Video</button>
-                    <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
-                </div>
-            </form>
-
-            <div id="statusMessage" class="status"></div>
-        </div>
-
-        <!-- Daftar Video -->
-        <div class="card">
-            <h2>Daftar Video</h2>
-            <button class="btn btn-secondary" onclick="loadVideos()" style="margin-bottom: 1rem;">Refresh Daftar</button>
-            <div id="videoList" class="video-list">
-                <p style="color: #6b7280;">Klik "Refresh Daftar" untuk memuat video...</p>
-            </div>
-        </div>
+    <header>
+        <h1>Video Collection</h1>
+        <nav class="filter-nav">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="indonesia">Indonesia</button>
+            <button class="filter-btn" data-filter="papua">Papua</button>
+        </nav>
+    </header>
+    
+    <main class="video-grid">
+        <a href="videos/test-cover-baru.html" class="video-card" data-category="indonesia">
+    <img src="covers/test-cover-baru.jpg" alt="Test Cover Baru" loading="lazy">
+    <div class="card-body">
+        <h3>Test Cover Baru</h3>
+        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">2026-09-02</p>
+        <span class="badge">indonesia</span>
     </div>
+</a>
+        <a href="videos/test-fix-1.html" class="video-card" data-category="indonesia">
+    <img src="covers/test-fix-1.jpg" alt="TEST FIX 1" loading="lazy">
+    <div class="card-body">
+        <h3>TEST FIX 1</h3>
+        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">2026-09-02</p>
+        <span class="badge">indonesia</span>
+    </div>
+</a>
+        <a href="videos/test-cover-baru2.html" class="video-card" data-category="indonesia">
+    <img src="covers/test-cover-baru2.jpg" alt="Test Cover Baru2" loading="lazy">
+    <div class="card-body">
+        <h3>Test Cover Baru2</h3>
+        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">2026-09-02</p>
+        <span class="badge">indonesia</span>
+    </div>
+</a>
+        <a href="videos/tes.html" class="video-card" data-category="indonesia">
+    <img src="covers/tes.jpg" alt="tes" loading="lazy">
+    <div class="card-body">
+        <h3>tes</h3>
+        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">2026-09-01</p>
+        <span class="badge">indonesia</span>
+    </div>
+</a>
+    </main>
 
-    <script>
-        // ====== KONFIGURASI ======
-        const WORKER_URL = 'https://farming-pilot.sulomace.workers.dev';
-        const GITHUB_OWNER = 'farming21';
-        const GITHUB_REPO = 'indonesia';
-        const GITHUB_API_VIDEOS_JSON = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/videos.json`;
+    <footer>
+        <p>&copy; 2026 Farming21. All rights reserved.</p>
+    </footer>
 
-        const form = document.getElementById('videoForm');
-        const statusDiv = document.getElementById('statusMessage');
-        const videoListDiv = document.getElementById('videoList');
-        const formTitle = document.getElementById('formTitle');
-        const editSlugInput = document.getElementById('editSlug');
-
-        // Set tanggal hari ini sebagai default
-        document.getElementById('tanggal').valueAsDate = new Date();
-
-        let cachedVideos = []; // dipakai oleh editVideo() supaya tidak perlu fetch ulang
-
-        // ====== SUBMIT (ADD / UPDATE) ======
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await handleSubmit();
-        });
-
-        async function handleSubmit() {
-            const slug = document.getElementById('slug').value.trim();
-            const judul = document.getElementById('judul').value.trim();
-            const driveId = document.getElementById('driveId').value.trim();
-            const kategori = document.getElementById('kategori').value;
-            const tanggal = document.getElementById('tanggal').value;
-            const deskripsi = document.getElementById('deskripsi').value.trim();
-            const coverFile = document.getElementById('coverFile').files[0];
-            const editSlug = editSlugInput.value;
-
-            // Validasi field wajib
-            if (!slug || !judul || !driveId || !kategori || !tanggal) {
-                showStatus('error', 'Semua field wajib (*) harus diisi!');
-                return;
-            }
-
-            // Validasi format slug: lowercase, angka, dan tanda hubung saja
-            if (!/^[a-z0-9-]+$/.test(slug)) {
-                showStatus('error', 'Slug hanya boleh berisi huruf kecil, angka, dan tanda hubung (-)');
-                return;
-            }
-
-            // Konversi cover ke base64 (dengan kompresi otomatis jika perlu)
-            let coverBase64 = null;
-            if (coverFile) {
-                try {
-                    showStatus('success', 'Memproses gambar cover...', true);
-                    coverBase64 = await prepareCoverBase64(coverFile);
-                } catch (err) {
-                    showStatus('error', `Gagal memproses cover: ${err.message}`);
-                    return;
-                }
-            }
-
-            const action = editSlug ? 'update' : 'add';
-            const payload = { action, slug, judul, driveId, kategori, tanggal, deskripsi, coverBase64 };
-
-            showStatus('success', 'Sedang mempublish...', true);
-
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // coverUploaded dibaca terpisah dari success, sesuai kontrak Worker:
-                    // saat action punya cover baru tapi coverUploaded=false, itu artinya
-                    // cover gagal padahal videos.json sudah ter-commit (kasus langka).
-                    let coverNote = '';
-                    if (coverFile) {
-                        coverNote = result.coverUploaded
-                            ? ' Cover berhasil diupload.'
-                            : ' Peringatan: cover TIDAK diupload (lihat detail di respons Worker).';
-                    }
-                    const linkHtml = result.url
-                        ? ` <a href="${result.url}" target="_blank" style="text-decoration: underline;">Lihat commit di GitHub</a>`
-                        : '';
-                    showStatus('success', `${action === 'add' ? 'Video berhasil ditambahkan' : 'Video berhasil diupdate'}!${coverNote}${linkHtml}`);
-                    resetForm();
-                    loadVideos();
-                } else {
-                    // Worker selalu mengembalikan alasan spesifik, termasuk saat
-                    // yang gagal adalah upload cover (result.coverUploaded === false).
-                    const prefix = (result.coverUploaded === false && coverFile) ? 'Gagal upload cover: ' : 'Gagal: ';
-                    showStatus('error', `${prefix}${result.error}`);
-                }
-            } catch (error) {
-                showStatus('error', `Error jaringan: ${error.message}`);
-            }
-        }
-
-        // ====== KOMPRESI COVER ======
-        // Batas Worker: 1.000.000 byte (~1MB) untuk STRING BASE64, bukan file mentah.
-        // Base64 menambah ukuran ~33%, jadi kita pakai ambang mentah yang jauh di bawah
-        // 1MB (750KB, bukan 900KB) supaya file yang TIDAK dikompres pun tetap aman:
-        // 750KB x 1.33 =~ 998KB, masih di bawah batas 1MB Worker.
-        // (Ambang 900KB akan menghasilkan ~1.2MB base64 untuk file yang lolos tanpa
-        // kompresi -> otomatis ditolak Worker dengan error "Cover terlalu besar".)
-        const MAX_COVER_RAW_BYTES = 750 * 1024;
-
-        async function prepareCoverBase64(file) {
-            if (!file.type.startsWith('image/')) {
-                throw new Error('File harus berupa gambar (JPG/PNG).');
-            }
-
-            if (file.size <= MAX_COVER_RAW_BYTES) {
-                return fileToBase64(file);
-            }
-
-            const img = await loadImageFromFile(file);
-            let quality = 0.85;
-            let maxDim = 1280;
-
-            for (let attempt = 0; attempt < 6; attempt++) {
-                const base64 = compressImageToBase64(img, maxDim, quality);
-                const estBytes = Math.floor((base64.length * 3) / 4);
-                if (estBytes <= MAX_COVER_RAW_BYTES * 1.34) {
-                    return base64;
-                }
-                quality -= 0.15;
-                maxDim = Math.floor(maxDim * 0.85);
-            }
-
-            throw new Error('Gambar tetap terlalu besar setelah kompresi. Coba gunakan gambar yang lebih kecil.');
-        }
-
-        function loadImageFromFile(file) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                const url = URL.createObjectURL(file);
-                img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
-                img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Gagal membaca gambar')); };
-                img.src = url;
-            });
-        }
-
-        function compressImageToBase64(img, maxDim, quality) {
-            const canvas = document.createElement('canvas');
-            let { width, height } = img;
-            if (width > maxDim || height > maxDim) {
-                if (width >= height) {
-                    height = Math.round((height * maxDim) / width);
-                    width = maxDim;
-                } else {
-                    width = Math.round((width * maxDim) / height);
-                    height = maxDim;
-                }
-            }
-            canvas.width = width;
-            canvas.height = height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, width, height);
-            return canvas.toDataURL('image/jpeg', quality); // data:image/jpeg;base64,xxxx
-        }
-
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-
-        // ====== LOAD & RENDER DAFTAR VIDEO ======
-        async function loadVideos() {
-            videoListDiv.innerHTML = '<p>Memuat...</p>';
-
-            try {
-                const response = await fetch(GITHUB_API_VIDEOS_JSON);
-                if (!response.ok) {
-                    throw new Error(`GitHub API ${response.status}`);
-                }
-                const data = await response.json();
-                const content = JSON.parse(decodeURIComponent(escape(atob(data.content))));
-                cachedVideos = content;
-
-                if (content.length === 0) {
-                    videoListDiv.innerHTML = '<p style="color: #6b7280;">Belum ada video.</p>';
-                    return;
-                }
-
-                let html = '';
-                content
-                    .slice()
-                    .sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal))
-                    .forEach(video => {
-                        html += `
-                        <div class="video-item">
-                            <div>
-                                <h3>${escapeHtml(video.judul)}</h3>
-                                <div class="meta">
-                                    <span class="badge badge-${video.kategori}">${escapeHtml(video.kategori)}</span>
-                                    <span style="margin-left: 0.5rem;">${escapeHtml(video.tanggal)}</span>
-                                </div>
-                            </div>
-                            <div class="actions">
-                                <button class="btn btn-secondary" onclick="editVideo('${escapeAttr(video.slug)}')">Edit</button>
-                                <button class="btn btn-danger" onclick="deleteVideo('${escapeAttr(video.slug)}')">Hapus</button>
-                            </div>
-                        </div>
-                    `;
-                    });
-
-                videoListDiv.innerHTML = html;
-            } catch (error) {
-                videoListDiv.innerHTML = `<p style="color: #ef4444;">Error: ${escapeHtml(error.message)}</p>`;
-            }
-        }
-
-        function escapeHtml(str) {
-            const div = document.createElement('div');
-            div.textContent = str ?? '';
-            return div.innerHTML;
-        }
-
-        function escapeAttr(str) {
-            return String(str ?? '').replace(/'/g, "\\'");
-        }
-
-        // ====== EDIT ======
-        function editVideo(slug) {
-            const video = cachedVideos.find(v => v.slug === slug);
-            if (!video) {
-                showStatus('error', 'Data video tidak ditemukan. Klik "Refresh Daftar" dulu, lalu coba lagi.');
-                return;
-            }
-
-            document.getElementById('judul').value = video.judul || '';
-            document.getElementById('slug').value = video.slug || '';
-            document.getElementById('driveId').value = video.driveId || '';
-            document.getElementById('kategori').value = video.kategori || '';
-            document.getElementById('tanggal').value = video.tanggal || '';
-            document.getElementById('deskripsi').value = video.deskripsi || '';
-            document.getElementById('coverFile').value = ''; // input file tidak bisa diisi programatik
-
-            editSlugInput.value = video.slug;
-            formTitle.textContent = `Edit Video: ${video.judul}`;
-
-            const coverHint = video.cover
-                ? ` Cover saat ini: ${video.cover} (biarkan kosong jika tidak ingin mengganti cover).`
-                : ' Video ini belum punya cover.';
-            showStatus('success', `Mode edit untuk "${video.judul}".${coverHint}`);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // ====== DELETE ======
-        async function deleteVideo(slug) {
-            if (!confirm(`Yakin ingin menghapus video "${slug}"?`)) return;
-
-            const payload = { action: 'delete', slug };
-
-            try {
-                const response = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    showStatus('success', 'Video berhasil dihapus!');
-                    loadVideos();
-                } else {
-                    showStatus('error', `Gagal: ${result.error}`);
-                }
-            } catch (error) {
-                showStatus('error', `Error: ${error.message}`);
-            }
-        }
-
-        // ====== UTIL ======
-        function showStatus(type, message, isLoading = false) {
-            statusDiv.className = `status ${type}`;
-            statusDiv.innerHTML = message;
-            statusDiv.style.display = 'block';
-            if (!isLoading) {
-                setTimeout(() => {
-                    statusDiv.style.display = 'none';
-                }, 10000);
-            }
-        }
-
-        function resetForm() {
-            form.reset();
-            document.getElementById('tanggal').valueAsDate = new Date();
-            editSlugInput.value = '';
-            formTitle.textContent = 'Tambah Video Baru';
-        }
-    </script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
