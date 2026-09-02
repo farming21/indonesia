@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tes kedua kali</title>
+    <meta name="description" content="Tes kedua kali">
+    <meta property="og:title" content="Tes kedua kali">
+    <meta property="og:description" content="Tes kedua kali">
+    <meta property="og:image" content="../covers/tes-kedua-kali.jpg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="back-btn">&larr; Kembali ke Beranda</a>
+    </header>
+    
+    <main class="video-detail">
+        <h1>Tes kedua kali</h1>
+        <p class="meta-info">Kategori: <strong>papua</strong> | Tanggal: 2026-09-02</p>
+        
+        <div class="video-player video-player-poster" id="videoPlayer">
+            <div class="video-poster" id="videoPoster" role="button" tabindex="0" aria-label="Putar Tes kedua kali">
+                <img src="../covers/tes-kedua-kali.jpg" alt="Tes kedua kali" loading="eager">
+                <button class="video-play-button" id="videoPlayButton" type="button" aria-label="Putar video">
+                    <span aria-hidden="true">▶</span>
+                </button>
+            </div>
+            <iframe
+                id="drivePlayer"
+                src="about:blank"
+                data-src="https://drive.google.com/file/d/1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8/preview"
+                title="Tes kedua kali"
+                allow="autoplay; fullscreen"
+                allowfullscreen
+                loading="lazy"
+                style="display:none;">
+            </iframe>
+        </div>
+
+        <script>
+        (function () {
+            const poster = document.getElementById('videoPoster');
+            const button = document.getElementById('videoPlayButton');
+            const iframe = document.getElementById('drivePlayer');
+            if (!poster || !iframe) return;
+
+            function openPlayer() {
+                if (iframe.src === 'about:blank') {
+                    iframe.src = iframe.dataset.src;
+                }
+                poster.style.display = 'none';
+                iframe.style.display = 'block';
+            }
+
+            poster.addEventListener('click', openPlayer);
+            poster.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    openPlayer();
+                }
+            });
+            if (button) button.addEventListener('click', function (event) {
+                event.stopPropagation();
+                openPlayer();
+            });
+        })();
+        </script>
+        
+        <div class="description">
+            <h3>Deskripsi</h3>
+            <p>Tes kedua kali</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Farming21. All rights reserved.</p>
+    </footer>
+</body>
+</html>
