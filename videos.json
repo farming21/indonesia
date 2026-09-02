@@ -1,11 +1,10 @@
 [
   {
-    "slug": "tes-kedua-kali",
-    "judul": "Tes kedua kali",
-    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "slug": "tes-video-1",
+    "judul": "Tes Video 1",
+    "driveId": "1mBwaa8uml_JNZatPeYI3VOCfNphCv6L5",
     "tanggal": "2026-09-02",
-    "deskripsi": "Tes kedua kali",
-    "kategori": "papua",
-    "cover": "covers/tes-kedua-kali.jpg"
+    "deskripsi": "Tes video 1",
+    "kategori": "papua"
   }
 ]

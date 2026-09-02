@@ -176,3 +176,38 @@ footer {
     outline-offset: -3px;
 }
 
+
+
+/* Adsterra slots */
+.ad-slot {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.ad-slot-banner {
+    min-height: 90px;
+    margin: 1rem auto 0;
+}
+.ad-banner-desktop {
+    display: block;
+    width: 728px;
+    max-width: 100%;
+    min-height: 90px;
+}
+.ad-banner-mobile {
+    display: none;
+    width: 320px;
+    max-width: 100%;
+    min-height: 50px;
+}
+.ad-slot-square {
+    min-height: 250px;
+    margin: 1.5rem auto;
+}
+@media (max-width: 767px) {
+    .ad-banner-desktop { display: none; }
+    .ad-banner-mobile { display: block; }
+    .ad-slot-banner { min-height: 50px; }
+}
