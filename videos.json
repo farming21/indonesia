@@ -1,13 +1,5 @@
 [
   {
-    "slug": "tes-video-1",
-    "judul": "Tes Video 1",
-    "driveId": "1dNbOT-XXVnz0DEglavr7sZ1ETO0xdnxG",
-    "tanggal": "2026-09-02",
-    "deskripsi": "Tes video 1",
-    "kategori": "indonesia"
-  },
-  {
     "slug": "tes-2",
     "judul": "Tes dua",
     "driveId": "https://drive.google.com/file/d/11CGYcRY8K1SdUSynasDWkeiKIRgK9YXl/view?usp=drivesdk",
