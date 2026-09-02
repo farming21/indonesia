@@ -10,6 +10,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 OUTPUT_DIR = BASE_DIR
 VIDEOS_OUTPUT_DIR = os.path.join(BASE_DIR, "videos")
 DEFAULT_COVER = "assets/img/no-cover.svg"
+SITE_URL = "https://farming21.github.io/indonesia"
 VALID_CATEGORIES = ("indonesia", "papua")
 REQUIRED_FIELDS = ("slug", "judul", "driveId", "tanggal", "deskripsi", "kategori")
 
@@ -69,6 +70,13 @@ def cover_for_video(video):
     return cover if cover else DEFAULT_COVER
 
 
+def absolute_cover_url(cover_path):
+    """Return an absolute URL suitable for Open Graph/Twitter previews."""
+    if cover_path.startswith(("http://", "https://")):
+        return cover_path
+    return f"{SITE_URL}/{cover_path.lstrip('/')}"
+
+
 def build_video_card(video):
     cover = cover_for_video(video)
     return f'''<a href="videos/{escape_html(video["slug"])}.html" class="video-card" data-category="{escape_html(video["kategori"])}">
@@ -113,8 +121,16 @@ def generate_video_pages(videos):
         output = output.replace("{{ TANGGAL }}", escape_html(v["tanggal"]))
 
         cover = cover_for_video(v)
-        cover_path = cover if cover.startswith("http") else "../" + cover
+        cover_path = cover if cover.startswith(("http://", "https://")) else "../" + cover
         output = output.replace("{{ COVER }}", escape_html(cover_path))
+
+        # Social sharing (Facebook, WhatsApp, Telegram, X, etc.) requires
+        # an absolute image URL; the player itself continues using the
+        # relative cover path above.
+        og_cover = absolute_cover_url(cover)
+        page_url = f"{SITE_URL}/videos/{v['slug']}.html"
+        output = output.replace("{{ OG_COVER }}", escape_html(og_cover))
+        output = output.replace("{{ PAGE_URL }}", escape_html(page_url))
 
         out_path = os.path.join(VIDEOS_OUTPUT_DIR, f"{v['slug']}.html")
         with open(out_path, "w", encoding="utf-8") as f:
