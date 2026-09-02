@@ -7,5 +7,14 @@
     "deskripsi": "Tes video",
     "kategori": "indonesia",
     "cover": "covers/tes.jpg"
+  },
+  {
+    "slug": "tes-2",
+    "judul": "Tes 2",
+    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "tanggal": "2026-09-02",
+    "deskripsi": "Tes 2",
+    "kategori": "papua",
+    "cover": "covers/tes-2.jpg"
   }
 ]
