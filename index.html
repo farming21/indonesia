@@ -3,202 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koleksi Video Indonesia & Papua - Farming21</title>
-    
-    <!-- Styling Dasar Website -->
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
-        header h1 { margin: 0; font-size: 24px; }
-        header p { margin: 5px 0 0; opacity: 0.8; font-size: 14px; }
-        
-        nav {
-            background-color: #34495e;
-            text-align: center;
-            padding: 10px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 15px;
-        }
-        nav a:hover { text-decoration: underline; }
-
-        .ad-container-desktop {
-            text-align: center;
-            margin: 15px auto;
-            max-width: 728px;
-            min-height: 90px;
-            display: block;
-        }
-        
-        .ad-container-mobile {
-            text-align: center;
-            margin: 10px auto;
-            max-width: 320px;
-            min-height: 50px;
-            display: none; /* Disembunyikan di Desktop */
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 15px;
-            display: flex;
-            gap: 20px;
-        }
-
-        .main-content {
-            flex: 3;
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .sidebar {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .sidebar .ad-box {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            text-align: center;
-            min-height: 250px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-            margin-top: 40px;
-            font-size: 14px;
-        }
-
-        /* Tampilan Mobile (HP) */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            .ad-container-desktop {
-                display: none; /* Disembunyikan di Mobile */
-            }
-            .ad-container-mobile {
-                display: block; /* Muncul di Mobile */
-            }
-            .sidebar {
-                order: 2;
-            }
-            .main-content {
-                order: 1;
-            }
-        }
-    </style>
+    <title>Koleksi Video Indonesia & Papua</title>
+    <meta name="description" content="Platform video kategori Indonesia dan Papua.">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
     <header>
-        <h1>Koleksi Video Indonesia & Papua</h1>
-        <p>Video Collection</p>
+        <h1>Video Collection</h1>
+        <nav class="filter-nav">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="indonesia">Indonesia</button>
+            <button class="filter-btn" data-filter="papua">Papua</button>
+        </nav>
     </header>
-
-    <!-- Iklan Banner 728x90 (Khusus Tampilan Desktop/Laptop) -->
-    <div class="ad-container-desktop">
-        <script>
-          atOptions = {
-            'key' : '7366db1a6f9c91dd7addc6b518a53079',
-            'format' : 'iframe',
-            'height' : 90,
-            'width' : 728,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highrevenueformat.com/7366db1a6f9c91dd7addc6b518a53079/invoke.js"></script>
-    </div>
-
-    <!-- Iklan Banner 320x50 (Khusus Tampilan Mobile/HP) -->
-    <div class="ad-container-mobile">
-        <script>
-          atOptions = {
-            'key' : '3b60f9f1b2f915b501c20ceff3a16493',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-          };
-        </script>
-        <script src="https://www.highrevenueformat.com/3b60f9f1b2f915b501c20ceff3a16493/invoke.js"></script>
-    </div>
-
-    <nav>
-        <a href="#">Semua</a>
-        <a href="#">Indonesia</a>
-        <a href="#">Papua</a>
-    </nav>
-
-    <div class="container">
-        <!-- Konten Utama -->
-        <div class="main-content">
-            <h2>Daftar Video</h2>
-            <div style="padding: 40px 0; color: #7f8c8d; font-size: 18px;">
-                Belum ada video.
-            </div>
-        </div>
-
-        <!-- Sidebar Kanan -->
-        <aside class="sidebar">
-            <!-- Iklan Banner 300x250 (Cocok untuk Sidebar) -->
-            <div class="ad-box">
-                <script>
-                  atOptions = {
-                    'key' : '6b78fdf35c5dd58ae54f80dbde15a0a7',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                  };
-                </script>
-                <script src="https://www.highrevenueformat.com/6b78fdf35c5dd58ae54f80dbde15a0a7/invoke.js"></script>
-            </div>
-        </aside>
-    </div>
+    
+    <main class="video-grid">
+        <p style="text-align:center;grid-column:1/-1;padding:2rem;color:#64748b;">Belum ada video.</p>
+    </main>
 
     <footer>
-        &copy; 2026 Farming21. All rights reserved.
+        <p>&copy; 2026 Farming21. All rights reserved.</p>
     </footer>
 
-    <!-- ========================================== -->
-    <!-- KODE IKLAN BACKGROUND (DILETAKKAN DI PALING BAWAH) -->
-    <!-- ========================================== -->
-
-    <!-- 1. Social Bar Adsterra -->
-    <script src="https://pl31153759.profitableratecpmnetwork.com/2b/cf/65/2bcf65ffddcef4b6148a24ba7b4088f4.js"></script>
-
-    <!-- 2. Popunder Adsterra -->
-    <script src="https://pl31153758.profitableratecpmnetwork.com/d2/af/6f/d2af6f57ba6140eb85607a828f454899.js"></script>
-
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
