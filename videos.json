@@ -9,15 +9,6 @@
     "cover": "covers/tes.jpg"
   },
   {
-    "slug": "test-cover-baru",
-    "judul": "Test Cover Baru",
-    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
-    "tanggal": "2026-09-02",
-    "deskripsi": "Test upload cover",
-    "kategori": "indonesia",
-    "cover": "covers/test-cover-baru.jpg"
-  },
-  {
     "slug": "test-fix-1",
     "judul": "TEST FIX 1",
     "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
