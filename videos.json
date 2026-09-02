@@ -1,11 +1,10 @@
 [
   {
-    "slug": "tes-ulangi",
-    "judul": "Tes ulangi",
-    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "slug": "tes-video-1",
+    "judul": "Tes Video 1",
+    "driveId": "1mBwaa8uml_JNZatPeYI3VOCfNphCv6L5",
     "tanggal": "2026-09-02",
-    "deskripsi": "Tes ulangi",
-    "kategori": "indonesia",
-    "cover": "covers/tes-ulangi.jpg"
+    "deskripsi": "Tes video 1",
+    "kategori": "papua"
   }
 ]

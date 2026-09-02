@@ -120,3 +120,59 @@ footer {
     color: #64748b;
     font-size: 0.9rem;
 }
+/* Video poster: cover berada di dalam frame player */
+.video-player-poster {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    border-radius: 8px;
+}
+.video-player-poster iframe,
+.video-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+.video-poster {
+    cursor: pointer;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.video-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.video-play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 50px;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease, background .15s ease;
+}
+.video-play-button:hover {
+    transform: translate(-50%, -50%) scale(1.06);
+    background: rgba(0, 0, 0, 0.9);
+}
+.video-poster:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: -3px;
+}
+
