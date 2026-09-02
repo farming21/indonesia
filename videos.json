@@ -7,5 +7,14 @@
     "deskripsi": "Viral papua - PACE VS MACE",
     "kategori": "papua",
     "cover": "covers/pace-mace.jpg"
+  },
+  {
+    "slug": "adek-kaka",
+    "judul": "Adek Kaka",
+    "driveId": "https://drive.google.com/file/d/15YLAlrs01dBc5BQ046G0TfxClWBr0fFf/view?usp=drivesdk",
+    "tanggal": "2026-09-02",
+    "deskripsi": "Adek Kaka",
+    "kategori": "indonesia",
+    "cover": "covers/adek-kaka.jpg"
   }
 ]
