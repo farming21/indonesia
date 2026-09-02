@@ -9,30 +9,43 @@ VIDEOS_JSON = os.path.join(BASE_DIR, "videos.json")
 TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
 OUTPUT_DIR = BASE_DIR
 VIDEOS_OUTPUT_DIR = os.path.join(BASE_DIR, "videos")
+DEFAULT_COVER = "assets/img/no-cover.svg"
+VALID_CATEGORIES = ("indonesia", "papua")
+REQUIRED_FIELDS = ("slug", "judul", "driveId", "tanggal", "deskripsi", "kategori")
+
 
 def load_videos():
     if not os.path.exists(VIDEOS_JSON):
         print(f"ERROR: {VIDEOS_JSON} tidak ditemukan.")
         sys.exit(1)
+
     with open(VIDEOS_JSON, "r", encoding="utf-8") as f:
         try:
             data = json.load(f)
         except json.JSONDecodeError as e:
             print(f"ERROR: videos.json tidak valid: {e}")
             sys.exit(1)
+
     if not isinstance(data, list):
         print("ERROR: videos.json harus berisi array.")
         sys.exit(1)
-    required = ["slug", "judul", "driveId", "tanggal", "deskripsi", "cover", "kategori"]
+
     for i, v in enumerate(data):
-        missing = [k for k in required if k not in v]
+        if not isinstance(v, dict):
+            print(f"ERROR: Video index {i} harus berupa object.")
+            sys.exit(1)
+
+        missing = [k for k in REQUIRED_FIELDS if not v.get(k)]
         if missing:
             print(f"ERROR: Video index {i} kekurangan field: {missing}")
             sys.exit(1)
-        if v["kategori"] not in ("indonesia", "papua"):
+
+        if v["kategori"] not in VALID_CATEGORIES:
             print(f"ERROR: Video '{v['slug']}' kategori tidak valid: {v['kategori']}")
             sys.exit(1)
+
     return data
+
 
 def load_template(name):
     path = os.path.join(TEMPLATES_DIR, name)
@@ -42,6 +55,7 @@ def load_template(name):
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
+
 def escape_html(text):
     return (str(text)
         .replace("&", "&amp;")
@@ -49,15 +63,23 @@ def escape_html(text):
         .replace(">", "&gt;")
         .replace('"', "&quot;"))
 
+
+def cover_for_video(video):
+    cover = str(video.get("cover") or "").strip()
+    return cover if cover else DEFAULT_COVER
+
+
 def build_video_card(video):
-    return f'''<a href="videos/{video["slug"]}.html" class="video-card" data-category="{video["kategori"]}">
-    <img src="{video["cover"]}" alt="{escape_html(video["judul"])}" loading="lazy">
+    cover = cover_for_video(video)
+    return f'''<a href="videos/{escape_html(video["slug"])}.html" class="video-card" data-category="{escape_html(video["kategori"])}">
+    <img src="{escape_html(cover)}" alt="{escape_html(video["judul"])}" loading="lazy">
     <div class="card-body">
         <h3>{escape_html(video["judul"])}</h3>
-        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">{video["tanggal"]}</p>
-        <span class="badge">{video["kategori"]}</span>
+        <p style="color:#64748b;font-size:0.85rem;margin-bottom:0.5rem;">{escape_html(video["tanggal"])}</p>
+        <span class="badge">{escape_html(video["kategori"])}</span>
     </div>
 </a>'''
+
 
 def generate_index(videos):
     template = load_template("index.html")
@@ -71,6 +93,7 @@ def generate_index(videos):
         f.write(output)
     print(f"OK: index.html ({len(videos)} video)")
 
+
 def generate_video_pages(videos):
     if os.path.exists(VIDEOS_OUTPUT_DIR):
         for fn in os.listdir(VIDEOS_OUTPUT_DIR):
@@ -78,20 +101,27 @@ def generate_video_pages(videos):
                 os.remove(os.path.join(VIDEOS_OUTPUT_DIR, fn))
     else:
         os.makedirs(VIDEOS_OUTPUT_DIR, exist_ok=True)
+
     template = load_template("video.html")
+
     for v in videos:
         output = template
         output = output.replace("{{ JUDUL }}", escape_html(v["judul"]))
         output = output.replace("{{ DESKRIPSI }}", escape_html(v["deskripsi"]))
-        output = output.replace("{{ DRIVE_ID }}", v["driveId"])
-        output = output.replace("{{ KATEGORI }}", v["kategori"])
-        output = output.replace("{{ TANGGAL }}", v["tanggal"])
-        cover_path = "../" + v["cover"] if not v["cover"].startswith("http") else v["cover"]
-        output = output.replace("{{ COVER }}", cover_path)
+        output = output.replace("{{ DRIVE_ID }}", escape_html(v["driveId"]))
+        output = output.replace("{{ KATEGORI }}", escape_html(v["kategori"]))
+        output = output.replace("{{ TANGGAL }}", escape_html(v["tanggal"]))
+
+        cover = cover_for_video(v)
+        cover_path = cover if cover.startswith("http") else "../" + cover
+        output = output.replace("{{ COVER }}", escape_html(cover_path))
+
         out_path = os.path.join(VIDEOS_OUTPUT_DIR, f"{v['slug']}.html")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(output)
+
     print(f"OK: videos/ ({len(videos)} halaman detail)")
+
 
 def main():
     print("=" * 60)
@@ -104,6 +134,7 @@ def main():
     print("=" * 60)
     print("GENERASI SELESAI")
     print("=" * 60)
+
 
 if __name__ == "__main__":
     main()
