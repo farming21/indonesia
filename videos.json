@@ -43,5 +43,14 @@
     "deskripsi": "TEST FIX 1",
     "kategori": "indonesia",
     "cover": "covers/test-fix-1.jpg"
+  },
+  {
+    "slug": "test-cover-baru2",
+    "judul": "Test Cover Baru2",
+    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "tanggal": "2026-09-02",
+    "deskripsi": "Test upload cover 2",
+    "kategori": "indonesia",
+    "cover": "covers/test-cover-baru2.jpg"
   }
 ]
