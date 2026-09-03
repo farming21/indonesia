@@ -25,14 +25,5 @@
     "deskripsi": "Testing rename slug V2.1.2",
     "kategori": "papua",
     "cover": "covers/v212-rename-test-baru.jpg"
-  },
-  {
-    "slug": "tes-1",
-    "judul": "tes 1",
-    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
-    "tanggal": "2026-09-03",
-    "deskripsi": "tes 1",
-    "kategori": "indonesia",
-    "cover": "covers/tes-1.jpg"
   }
 ]
