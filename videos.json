@@ -25,5 +25,14 @@
     "deskripsi": "Viral Indonesia - Budeku Mandi",
     "kategori": "indonesia",
     "cover": "covers/budeku-mandi.jpg"
+  },
+  {
+    "slug": "bakit-sorong",
+    "judul": "Viral Papua - Bakit Sorong",
+    "driveId": "1Ogl2o-lBrOxzeu0h2GvWhkL23AteAw4I",
+    "tanggal": "2026-09-03",
+    "deskripsi": "Viral Papua - Bakit Sorong Sara Kambu",
+    "kategori": "papua",
+    "cover": "covers/bakit-sorong.jpg"
   }
 ]
