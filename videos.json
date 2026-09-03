@@ -16,5 +16,14 @@
     "deskripsi": "Viral Papua - Orang Mama",
     "kategori": "papua",
     "cover": "covers/viral-papua-orang-mama.jpg"
+  },
+  {
+    "slug": "v212-rename-test",
+    "judul": "V2.1.2 Rename Test",
+    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
+    "tanggal": "2026-09-03",
+    "deskripsi": "Testing rename slug V2.1.2",
+    "kategori": "papua",
+    "cover": "covers/v212-rename-test.jpg"
   }
 ]
