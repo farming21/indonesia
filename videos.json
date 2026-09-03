@@ -16,14 +16,5 @@
     "deskripsi": "Viral Papua - Orang Mama",
     "kategori": "papua",
     "cover": "covers/viral-papua-orang-mama.jpg"
-  },
-  {
-    "slug": "v21-test-video",
-    "judul": "V2.1 Test Video",
-    "driveId": "1NlD1XC0ZKP8F9w9FgGhxkeeHDUH89PF8",
-    "tanggal": "2026-09-03",
-    "deskripsi": "Testing sistem RepoPilot AI V2.1.",
-    "kategori": "papua",
-    "cover": "covers/v21-test-video.jpg"
   }
 ]
