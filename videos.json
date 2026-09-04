@@ -52,5 +52,14 @@
     "deskripsi": "Viral Indonesia - Prank OJOL",
     "kategori": "indonesia",
     "cover": "covers/prank-ojol.jpg"
+  },
+  {
+    "slug": "mauren-worth",
+    "judul": "Viral Papua - Maurent Worth",
+    "driveId": "1Fy1VAgOKVzEskUqmjY4xv2cBoLs-mj-K",
+    "tanggal": "2026-09-04",
+    "deskripsi": "Viral Papua - Maurent Worth",
+    "kategori": "papua",
+    "cover": "covers/mauren-worth.jpg"
   }
 ]
