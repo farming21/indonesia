@@ -142,5 +142,14 @@
     "deskripsi": "Viral Papua - KOCOK PAKE KETIMUN",
     "kategori": "papua",
     "cover": "covers/kocok-pake-ketimun.jpg"
+  },
+  {
+    "slug": "stw-gemoy",
+    "judul": "Viral Indonesia - STW Gemoy",
+    "driveId": "15WrlkbtzISLB-gXkJjpYxRjyKys321mZ",
+    "tanggal": "2026-09-06",
+    "deskripsi": "Viral Indonesia - STW Gemoy",
+    "kategori": "indonesia",
+    "cover": "covers/stw-gemoy.jpg"
   }
 ]
