@@ -154,7 +154,27 @@ def generate_video_pages(videos):
             x for x in sorted(videos, key=lambda x: x["tanggal"], reverse=True)
             if x["slug"] != v["slug"]
         ]
-        related_html = "\n                ".join(build_related_video_card(x) for x in related_videos)
+        # Tampilkan 4 video, lalu 1 iklan kotak 300x250, berulang seterusnya.
+        related_parts = []
+        for index, related_video in enumerate(related_videos, start=1):
+            related_parts.append(build_related_video_card(related_video))
+            if index % 4 == 0 and index < len(related_videos):
+                related_parts.append('''<div class="related-ad-slot" aria-label="Iklan">
+    <div class="related-ad-inner">
+        <script>
+          atOptions = {
+            'key' : '6b78fdf35c5dd58ae54f80dbde15a0a7',
+            'format' : 'iframe',
+            'height' : 250,
+            'width' : 300,
+            'params' : {}
+          };
+        </script>
+        <script src="https://www.highrevenueformat.com/6b78fdf35c5dd58ae54f80dbde15a0a7/invoke.js"></script>
+    </div>
+</div>''')
+
+        related_html = "\n                ".join(related_parts)
         if not related_html:
             related_html = '<p class="related-empty">Belum ada video lainnya.</p>'
         output = output.replace("{{ RELATED_VIDEOS }}", related_html)
