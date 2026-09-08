@@ -140,6 +140,8 @@ main {
 .video-player-poster {
     position: relative;
     width: 100%;
+    height: auto;
+    min-height: 0;
     aspect-ratio: 16 / 9;
     padding-bottom: 0;
     overflow: hidden;
